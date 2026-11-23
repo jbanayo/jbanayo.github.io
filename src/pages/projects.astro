@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { openSourceProjects, site } from '../data/site';
+---
+
+<BaseLayout
+  title="Open Source & Projects"
+  description="Open-source software, AI experiments, and product initiatives built in public."
+>
+  <span class="eyebrow">Software, AI &amp; Open Source</span>
+  <h1>Open Source &amp; Projects</h1>
+  <p class="lead">
+    Alongside physical assistive devices and scientific research, I build open-source tools,
+    explore practical AI workflows, and look for meaningful open-source projects to contribute to.
+  </p>
+
+  <div class="grid-2" style="margin-top:2rem;">
+    {
+      openSourceProjects.map((project) => (
+        <article class="card">
+          <div class="meta-row">
+            <span class="pill">{project.category}</span>
+            <span class="pill pill-muted">{project.status}</span>
+          </div>
+          <h3>
+            <a href={project.repo} target="_blank" rel="noreferrer" style="color:inherit;">
+              {project.name}
+            </a>
+          </h3>
+          <p>{project.description}</p>
+          <div class="meta-row" style="margin-top:0.5rem;">
+            {project.tags.map((tag) => (
+              <span class="pill pill-muted">{tag}</span>
+            ))}
+          </div>
+          <a href={project.repo} target="_blank" rel="noreferrer" style="font-size:0.9rem;font-weight:500;">
+            View repository ↗
+          </a>
+        </article>
+      ))
+    }
+  </div>
+
+  <section class="section">
+    <div class="card">
+      <span class="eyebrow">Build Together</span>
+      <h2>Looking to collaborate on open-source rehab, hardware, or AI tools?</h2>
+      <p>
+        I actively use GitHub to document experiments, share code, and collaborate with engineers
+        and researchers around the world.
+      </p>
+      <div class="btn-row" style="margin-top:1rem;">
+        <a class="btn btn-primary" href={site.links.github} target="_blank" rel="noreferrer">
+          Follow @jbanayo on GitHub ↗
+        </a>
+        <a class="btn" href="/collaborate">Get in touch →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

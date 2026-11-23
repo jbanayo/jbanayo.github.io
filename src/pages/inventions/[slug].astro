@@ -1,0 +1,97 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const inventions = await getCollection('inventions');
+  return inventions.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.summary}
+  ogImage={entry.data.heroImage}
+>
+  <a href="/inventions" style="font-size:0.9rem;display:inline-block;margin-bottom:1.25rem;">
+    ← Back to Devices &amp; Patents
+  </a>
+
+  <div class="meta-row">
+    <span class="pill">{entry.data.patentNumber}</span>
+    <span class="pill pill-muted">{entry.data.status}</span>
+  </div>
+  <h1>{entry.data.title}</h1>
+  <p class="lead">{entry.data.subtitle}</p>
+
+  <div class="card" style="margin:1.75rem 0;">
+    <div class="grid-2" style="gap:0.85rem;">
+      {entry.data.filingDate && (
+        <div>
+          <div class="eyebrow" style="margin-bottom:0.2rem;">Filing Date</div>
+          <div>{entry.data.filingDate}</div>
+        </div>
+      )}
+      {entry.data.grantDate && (
+        <div>
+          <div class="eyebrow" style="margin-bottom:0.2rem;">Grant Date</div>
+          <div>{entry.data.grantDate}</div>
+        </div>
+      )}
+      {entry.data.internationalPubs.length > 0 && (
+        <div>
+          <div class="eyebrow" style="margin-bottom:0.2rem;">International Publications</div>
+          <div>{entry.data.internationalPubs.join(' · ')}</div>
+        </div>
+      )}
+      {entry.data.institutions.length > 0 && (
+        <div>
+          <div class="eyebrow" style="margin-bottom:0.2rem;">Institutions &amp; Support</div>
+          <div>{entry.data.institutions.join(' · ')}</div>
+        </div>
+      )}
+    </div>
+  </div>
+
+  {(entry.data.heroImage || entry.data.secondaryImage) && (
+    <div class="gallery-2">
+      {entry.data.heroImage && (
+        <figure>
+          <img src={entry.data.heroImage} alt={`${entry.data.title} front view`} />
+          <figcaption>Clinical interface, full-body harness, and TAYÔ / LLMo feature overview.</figcaption>
+        </figure>
+      )}
+      {entry.data.secondaryImage && (
+        <figure>
+          <img src={entry.data.secondaryImage} alt={`${entry.data.title} mechanical view`} />
+          <figcaption>Rear frame and linear actuator mechanism during public demonstration.</figcaption>
+        </figure>
+      )}
+    </div>
+  )}
+
+  <div class="prose">
+    <Content />
+  </div>
+
+  {entry.data.officialLinks.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Official Public Records</h2>
+      </div>
+      <div class="btn-row" style="margin-top:0;">
+        {entry.data.officialLinks.map((link) => (
+          <a class="btn" href={link.href} target="_blank" rel="noreferrer">
+            {link.label} ↗
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const focusAreas = [
+  {
+    title: 'Rehabilitation Science & Biomedical Research',
+    detail:
+      'Joint papers, clinical-engineering studies, human function evaluation (ICF), and assistive technology validation.',
+  },
+  {
+    title: 'Assistive Hardware & New Inventions',
+    detail:
+      'Designing practical devices that help people—from early user empathy and prototyping to IP strategy and value engineering.',
+  },
+  {
+    title: 'Open-Source Projects & Contributions',
+    detail:
+      'Collaborating on open tools for rehabilitation data, robotics, AI workflows, and research reproducibility.',
+  },
+  {
+    title: 'MedTech / Robotics Product & Project Management',
+    detail:
+      'Bridging technical teams, clinicians, and business stakeholders to move promising R&D closer to real-world adoption.',
+  },
+];
+---
+
+<BaseLayout
+  title="Collaborate"
+  description="Let's build assistive devices, publish scientific research, and contribute to open-source projects together."
+>
+  <span class="eyebrow">Network &amp; Build Together</span>
+  <h1>Let’s collaborate.</h1>
+  <p class="lead">
+    The best breakthroughs I have been part of happened when people from different disciplines and
+    institutions worked in the same room. If you are building devices, researching rehabilitation,
+    or creating open-source tools that help people, I would love to connect.
+  </p>
+
+  <div class="grid-2" style="margin-top:2rem;">
+    {
+      focusAreas.map((area) => (
+        <div class="card">
+          <h3>{area.title}</h3>
+          <p style="margin:0;">{area.detail}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <section class="section">
+    <div class="card">
+      <span class="eyebrow">Direct Links</span>
+      <h2>Where to find me</h2>
+      <p>
+        Feel free to reach out on GitHub or LinkedIn to start a conversation about research,
+        hardware, open source, or product collaboration.
+      </p>
+      <div class="btn-row" style="margin-top:1rem;">
+        <a class="btn btn-primary" href={site.links.github} target="_blank" rel="noreferrer">
+          GitHub (@jbanayo) ↗
+        </a>
+        {site.links.linkedin && site.links.linkedin !== 'https://www.linkedin.com/in/' && (
+          <a class="btn" href={site.links.linkedin} target="_blank" rel="noreferrer">
+            LinkedIn ↗
+          </a>
+        )}
+        {site.links.email && (
+          <a class="btn" href={`mailto:${site.links.email}`}>
+            Email ({site.links.email})
+          </a>
+        )}
+        {site.links.scholar && (
+          <a class="btn" href={site.links.scholar} target="_blank" rel="noreferrer">
+            Google Scholar ↗
+          </a>
+        )}
+        {site.links.orcid && (
+          <a class="btn" href={site.links.orcid} target="_blank" rel="noreferrer">
+            ORCID ↗
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

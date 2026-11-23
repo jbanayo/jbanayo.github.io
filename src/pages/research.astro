@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { researchItems, education, site } from '../data/site';
+---
+
+<BaseLayout
+  title="Research & Papers"
+  description="Scientific publications, doctoral research in Fundamental Rehabilitation Sciences, and translational biomedical engineering."
+>
+  <span class="eyebrow">Academic &amp; Scientific Work</span>
+  <h1>Research &amp; Papers</h1>
+  <p class="lead">
+    My doctoral work at Gunma University explores Fundamental Rehabilitation Sciences—connecting
+    human function evaluation (ICF), kinematic/physiological understanding, and practical assistive
+    technologies.
+  </p>
+  <div class="btn-row" style="margin-top:1.15rem;">
+    <a class="btn" href={site.links.orcid} target="_blank" rel="noreferrer">
+      ORCID (0009-0003-8633-7340) ↗
+    </a>
+    <a class="btn" href="/collaborate">Research Collaborations →</a>
+  </div>
+
+  <section class="section" style="margin-top:2rem;">
+    <div class="section-head">
+      <h2>Research Tracks &amp; Public Records</h2>
+    </div>
+    <div class="stack">
+      {
+        researchItems.map((item) => (
+          <article class="card">
+            <div class="meta-row">
+              <span class="pill">{item.type}</span>
+              <span>{item.year}</span>
+            </div>
+            <h3 style="font-size:1.2rem;">{item.title}</h3>
+            <p style="font-size:0.92rem;color:var(--text);margin-bottom:0.6rem;">{item.venue}</p>
+            <p>{item.summary}</p>
+            {item.links.length > 0 && (
+              <div class="btn-row" style="margin-top:0.75rem;">
+                {item.links.map((link) => (
+                  <a class="btn" href={link.href} target="_blank" rel="noreferrer">
+                    {link.label} ↗
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Academic Training</h2>
+    </div>
+    <div class="stack">
+      {
+        education.map((ed) => (
+          <div class="list-item">
+            <div class="list-item-head">
+              <h3 style="margin:0;">{ed.degree}</h3>
+              <span class="pill pill-muted">{ed.period}</span>
+            </div>
+            <div style="font-size:0.92rem;font-weight:500;color:var(--text);">{ed.institution}</div>
+            <p style="margin:0.2rem 0 0;">{ed.focus}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

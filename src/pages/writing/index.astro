@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Writing"
+  description="Notes on how my mind works across rehabilitation robotics, patents, product management, and scientific research."
+>
+  <span class="eyebrow">Notes &amp; Reflections</span>
+  <h1>Writing</h1>
+  <p class="lead">
+    Expanded reflections on engineering decisions, clinical empathy, intellectual property,
+    project management, and lessons from building devices that help people.
+  </p>
+
+  <div class="stack" style="margin-top:2rem;">
+    {
+      posts.map((post) => (
+        <article class="card">
+          <div class="meta-row">
+            <span>{formatDate(post.data.date)}</span>
+            {post.data.tags.map((tag) => (
+              <span class="pill pill-muted">{tag}</span>
+            ))}
+          </div>
+          <h2 style="margin-bottom:0.5rem;">
+            <a href={`/writing/${post.id}`} style="color:inherit;">
+              {post.data.title}
+            </a>
+          </h2>
+          <p>{post.data.summary}</p>
+          <a href={`/writing/${post.id}`} style="font-size:0.9rem;font-weight:500;">
+            Read note →
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

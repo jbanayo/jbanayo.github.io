@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const inventions = (await getCollection('inventions')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout
+  title="Devices & Patents"
+  description="Assistive hardware, biomedical robotics prototypes, and granted patent records."
+>
+  <span class="eyebrow">Hardware &amp; Intellectual Property</span>
+  <h1>Devices &amp; Patents</h1>
+  <p class="lead">
+    Rehabilitation hardware and assistive inventions built with multidisciplinary clinical,
+    engineering, and institutional teams.
+  </p>
+
+  <div class="stack" style="margin-top:2rem;">
+    {
+      inventions.map((item) => (
+        <article class="card">
+          {item.data.heroImage && (
+            <a href={`/inventions/${item.id}`} class="card-media" style="display:block;max-height:360px;">
+              <img src={item.data.heroImage} alt={item.data.title} />
+            </a>
+          )}
+          <div class="meta-row">
+            <span class="pill">{item.data.patentNumber}</span>
+            <span class="pill pill-muted">{item.data.status}</span>
+            {item.data.grantDate && <span>Granted {item.data.grantDate}</span>}
+          </div>
+          <h2>
+            <a href={`/inventions/${item.id}`} style="color:inherit;">
+              {item.data.title}
+            </a>
+          </h2>
+          <p>{item.data.summary}</p>
+          <div class="btn-row" style="margin-top:1rem;">
+            <a class="btn btn-primary" href={`/inventions/${item.id}`}>
+              Read full record &amp; lessons →
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

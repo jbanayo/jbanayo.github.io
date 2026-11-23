@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, education, openSourceProjects } from '../data/site';
+
+const inventions = (await getCollection('inventions')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <span class="eyebrow">Rehabilitation Science · Assistive Hardware · Open Source</span>
+    <h1>Designing devices, research, and tools that help people.</h1>
+    <p class="lead">
+      I’m <strong>{site.name}</strong>—an electronics engineer, co-inventor of patented
+      rehabilitation robotics, project/product builder, and PhD researcher in Fundamental
+      Rehabilitation Sciences at Gunma University. I share how my mind works across hardware R&D,
+      clinical empathy, scientific research, and open-source software.
+    </p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/collaborate">Build &amp; Collaborate With Me</a>
+      <a class="btn" href="/inventions">Explore Patents &amp; Devices</a>
+      <a class="btn" href={site.links.github} target="_blank" rel="noreferrer">GitHub (@jbanayo)</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Devices &amp; Patents</h2>
+      <a class="section-link" href="/inventions">View all inventions →</a>
+    </div>
+    <div class="grid-2">
+      {
+        inventions.map((item) => (
+          <article class="card">
+            {item.data.heroImage && (
+              <a href={`/inventions/${item.id}`} class="card-media" style="display:block;">
+                <img src={item.data.heroImage} alt={item.data.title} loading="lazy" />
+              </a>
+            )}
+            <div class="meta-row">
+              <span class="pill">{item.data.patentNumber}</span>
+              <span>{item.data.status}</span>
+            </div>
+            <h3>
+              <a href={`/inventions/${item.id}`} style="color:inherit;">
+                {item.data.title}
+              </a>
+            </h3>
+            <p>{item.data.summary}</p>
+            <a href={`/inventions/${item.id}`} style="font-size:0.9rem;font-weight:500;">
+              Read case study →
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Open Source &amp; Product Builds</h2>
+      <a class="section-link" href="/projects">All projects →</a>
+    </div>
+    <div class="grid-2">
+      {
+        openSourceProjects.slice(0, 2).map((project) => (
+          <article class="card">
+            <div class="meta-row">
+              <span class="pill pill-muted">{project.category}</span>
+              <span>{project.status}</span>
+            </div>
+            <h3>
+              <a href={project.repo} target="_blank" rel="noreferrer" style="color:inherit;">
+                {project.name}
+              </a>
+            </h3>
+            <p>{project.description}</p>
+            <a href={project.repo} target="_blank" rel="noreferrer" style="font-size:0.9rem;">
+              View on GitHub ↗
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Background</h2>
+      <a class="section-link" href="/research">Research &amp; Papers →</a>
+    </div>
+    <div class="stack">
+      {
+        education.map((ed) => (
+          <div class="list-item">
+            <div class="list-item-head">
+              <h3 style="margin:0;">{ed.degree}</h3>
+              <span class="pill pill-muted">{ed.period}</span>
+            </div>
+            <div style="font-size:0.92rem;font-weight:500;color:var(--text);">{ed.institution}</div>
+            <p style="margin:0.2rem 0 0;">{ed.focus}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
