@@ -42,16 +42,35 @@ import {
       {
         bycProducts.map((product) => (
           <article class="card">
-            <div class="list-item-head" style="margin-bottom:0.35rem;">
-              <h3 style="font-size:1.22rem;margin:0;">
-                {product.name}{' '}
-                <span style="font-weight:400;color:var(--text-muted);font-size:0.98rem;">
-                  — {product.subtitle}
-                </span>
-              </h3>
+            <div class="list-item-head" style="margin-bottom:0.45rem;">
+              <div class="product-title-wrap">
+                {product.logo && (
+                  <img
+                    class="product-logo"
+                    src={product.logo}
+                    alt={`${product.name} logo`}
+                    loading="lazy"
+                  />
+                )}
+                <h3 style="font-size:1.22rem;margin:0;">
+                  {product.name}{' '}
+                  <span style="font-weight:400;color:var(--text-muted);font-size:0.98rem;">
+                    — {product.subtitle}
+                  </span>
+                </h3>
+              </div>
               <span class="pill">{product.role}</span>
             </div>
             <p style="margin-bottom:0.5rem;color:var(--text);">{product.summary}</p>
+            {product.images.length > 0 && (
+              <div class="product-gallery">
+                {product.images.map((img) => (
+                  <div class="product-shot">
+                    <img src={img.src} alt={img.alt} loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            )}
             <ul class="bullet-list">
               {product.bullets.map((bullet) => (
                 <li>{bullet}</li>

@@ -67,15 +67,35 @@ const inventions = (await getCollection('inventions')).sort(
       {
         bycProducts.slice(0, 4).map((product) => (
           <article class="card">
+            {product.images[0] && (
+              <a href="/projects#byc-ventures" class="card-media" style="display:block;">
+                <img
+                  src={product.images[0].src}
+                  alt={product.images[0].alt}
+                  style="object-position:top center;"
+                  loading="lazy"
+                />
+              </a>
+            )}
             <div class="meta-row">
               <span class="pill">{product.role}</span>
               <span>{product.subtitle}</span>
             </div>
-            <h3>
-              <a href="/projects#byc-ventures" style="color:inherit;">
-                {product.name}
-              </a>
-            </h3>
+            <div class="product-title-wrap" style="margin-bottom:0.4rem;">
+              {product.logo && (
+                <img
+                  class="product-logo"
+                  src={product.logo}
+                  alt={`${product.name} logo`}
+                  loading="lazy"
+                />
+              )}
+              <h3 style="margin:0;">
+                <a href="/projects#byc-ventures" style="color:inherit;">
+                  {product.name}
+                </a>
+              </h3>
+            </div>
             <p>{product.summary}</p>
             <a href="/projects#byc-ventures" style="font-size:0.9rem;font-weight:500;">
               View product contributions →

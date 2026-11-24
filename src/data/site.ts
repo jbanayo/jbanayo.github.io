@@ -63,6 +63,11 @@ export const bycProducts = [
     name: 'BYC Halo',
     subtitle: 'Partner Portal',
     role: 'Product Manager & Builder',
+    logo: '/images/byc/logo-byc.png',
+    images: [
+      { src: '/images/byc/halo-partner-dashboard.png', alt: 'BYC Halo partner dashboard' },
+      { src: '/images/byc/halo-admin-product-metrics.png', alt: 'BYC Halo admin product metrics' },
+    ],
     summary:
       'Partner accreditation, courses, auto-filled certificates, and co-selling portal for BYC deals.',
     bullets: [
@@ -76,6 +81,11 @@ export const bycProducts = [
     name: 'Lumen Beacon',
     subtitle: 'AI Business Analytics',
     role: 'Product Manager',
+    logo: '/images/byc/logo-lumen.png',
+    images: [
+      { src: '/images/byc/beacon-dashboard.png', alt: 'Lumen Beacon AI analytics dashboard' },
+      { src: '/images/byc/beacon-guided-tour.png', alt: 'Lumen Beacon 8-step guided tour' },
+    ],
     summary:
       'Conversational business analytics platform where companies query their own numbers and receive verified answers with charts.',
     bullets: [
@@ -89,6 +99,11 @@ export const bycProducts = [
     name: 'Prismo',
     subtitle: 'Blockchain Identity (Passport, Pulse, Prismo AI)',
     role: 'Co-Owner',
+    logo: '/images/byc/logo-prismo.png',
+    images: [
+      { src: '/images/byc/prismo-machine-passport.png', alt: 'Prismo 3D machine Passport prototype' },
+      { src: '/images/byc/prismo-passport-intro.png', alt: 'Prismo Passport onboarding interface' },
+    ],
     summary:
       'Public blockchain ecosystem featuring a self-owned identity account and verified surveys.',
     bullets: [
@@ -102,6 +117,8 @@ export const bycProducts = [
     name: 'Lumen Platform & Core',
     subtitle: 'Developer Platform & APIs',
     role: 'Owner',
+    logo: '/images/byc/logo-lumen.png',
+    images: [],
     summary:
       'Core developer infrastructure covering developer portal, wallet APIs, keys, gas, and platform migrations.',
     bullets: [
@@ -115,6 +132,8 @@ export const bycProducts = [
     name: 'BYC Admin Portal',
     subtitle: 'Unified Internal Operations',
     role: 'Concept & Prototype Lead',
+    logo: '/images/byc/logo-byc.png',
+    images: [],
     summary:
       'Single internal admin surface unifying operations across BYC’s product suite.',
     bullets: [
@@ -127,6 +146,8 @@ export const bycProducts = [
     name: 'Time Chamber',
     subtitle: 'Self-Serve AI Evaluation',
     role: 'Product Owner',
+    logo: '/images/byc/logo-byc.png',
+    images: [],
     summary:
       'Internal evaluation platform designed to make AI benchmarking self-serve across the team.',
     bullets: [
