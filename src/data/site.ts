@@ -45,7 +45,7 @@ export const education = [
 
 export const bycOverview = {
   company: 'BYC Ventures',
-  period: 'June – November 2026',
+  period: '2026',
   role: 'Product Manager & AI-Assisted Builder',
   summary:
     'Product manager across BYC’s suite of AI, blockchain, and partner products who also builds and ships production code with AI coding agents—taking products from idea to production with lean teams while establishing the documentation, QA, and planning systems the product team runs on.',
@@ -75,7 +75,7 @@ export const bycProducts = [
   {
     name: 'Lumen Beacon',
     subtitle: 'AI Business Analytics',
-    role: 'Product Manager (Sep – Mid-Nov)',
+    role: 'Product Manager',
     summary:
       'Conversational business analytics platform where companies query their own numbers and receive verified answers with charts.',
     bullets: [
@@ -134,17 +134,6 @@ export const bycProducts = [
       'Established the project structure, naming, target schedule, and first sprint user stories.',
     ],
     tags: ['AI Evals', 'Developer Productivity', 'Self-Serve'],
-  },
-  {
-    name: 'Katibayan & Integrity Chain',
-    subtitle: 'Government-Facing Products',
-    role: 'Product Discovery & Technical Review',
-    summary:
-      'Due diligence and product handover preparation for two government-facing blockchain/verification systems.',
-    bullets: [
-      'Conducted structured product studies and read-only code reviews across 23 repositories to equip the product team for ownership transition.',
-    ],
-    tags: ['GovTech', 'Codebase Review', 'Product Handover'],
   },
 ];
 
