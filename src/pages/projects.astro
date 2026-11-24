@@ -1,53 +1,136 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { openSourceProjects, site } from '../data/site';
+import {
+  bycOverview,
+  bycProducts,
+  bycPractices,
+  openSourceProjects,
+  site,
+} from '../data/site';
 ---
 
 <BaseLayout
-  title="Open Source & Projects"
-  description="Open-source software, AI experiments, and product initiatives built in public."
+  title="Products & Projects"
+  description="Product management and AI-assisted software builds across BYC Ventures' product suite, plus open-source repositories."
 >
-  <span class="eyebrow">Software, AI &amp; Open Source</span>
-  <h1>Open Source &amp; Projects</h1>
+  <span class="eyebrow">Product Management · AI-Assisted Engineering · Open Source</span>
+  <h1>Products &amp; Projects</h1>
   <p class="lead">
-    Alongside physical assistive devices and scientific research, I build open-source tools,
-    explore practical AI workflows, and look for meaningful open-source projects to contribute to.
+    From shipping production AI and partner platforms with AI coding agents at BYC Ventures to
+    building open-source tools and experiments on GitHub.
   </p>
 
-  <div class="grid-2" style="margin-top:2rem;">
-    {
-      openSourceProjects.map((project) => (
-        <article class="card">
-          <div class="meta-row">
-            <span class="pill">{project.category}</span>
-            <span class="pill pill-muted">{project.status}</span>
+  <section id="byc-ventures" class="section" style="margin-top:2.25rem;">
+    <div class="section-head">
+      <h2>{bycOverview.company} — Contributions by Product</h2>
+      <span class="pill pill-muted">{bycOverview.period}</span>
+    </div>
+    <p class="lead" style="font-size:1.02rem;">{bycOverview.summary}</p>
+
+    <div class="stats-grid">
+      {
+        bycOverview.highlights.map((item) => (
+          <div class="stat-card">
+            <div class="stat-metric">{item.metric}</div>
+            <div class="stat-label">{item.label}</div>
           </div>
-          <h3>
-            <a href={project.repo} target="_blank" rel="noreferrer" style="color:inherit;">
-              {project.name}
+        ))
+      }
+    </div>
+
+    <div class="stack">
+      {
+        bycProducts.map((product) => (
+          <article class="card">
+            <div class="list-item-head" style="margin-bottom:0.35rem;">
+              <h3 style="font-size:1.22rem;margin:0;">
+                {product.name}{' '}
+                <span style="font-weight:400;color:var(--text-muted);font-size:0.98rem;">
+                  — {product.subtitle}
+                </span>
+              </h3>
+              <span class="pill">{product.role}</span>
+            </div>
+            <p style="margin-bottom:0.5rem;color:var(--text);">{product.summary}</p>
+            <ul class="bullet-list">
+              {product.bullets.map((bullet) => (
+                <li>{bullet}</li>
+              ))}
+            </ul>
+            <div class="meta-row" style="margin:0;">
+              {product.tags.map((tag) => (
+                <span class="pill pill-muted">{tag}</span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div style="margin-top:2rem;">
+      <h3 style="font-family:var(--font-serif);font-size:1.3rem;margin-bottom:1rem;">
+        Product Systems &amp; AI Workflows Built
+      </h3>
+      <div class="grid-3">
+        {
+          bycPractices.map((practice) => (
+            <div class="card">
+              <h3 style="font-size:1rem;">{practice.name}</h3>
+              <p style="margin:0;font-size:0.9rem;">{practice.detail}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="open-source" class="section">
+    <div class="section-head">
+      <h2>Open Source &amp; Independent Builds</h2>
+      <a class="section-link" href={site.links.github} target="_blank" rel="noreferrer">
+        github.com/jbanayo ↗
+      </a>
+    </div>
+    <div class="grid-2">
+      {
+        openSourceProjects.map((project) => (
+          <article class="card">
+            <div class="meta-row">
+              <span class="pill">{project.category}</span>
+              <span class="pill pill-muted">{project.status}</span>
+            </div>
+            <h3>
+              <a href={project.repo} target="_blank" rel="noreferrer" style="color:inherit;">
+                {project.name}
+              </a>
+            </h3>
+            <p>{project.description}</p>
+            <div class="meta-row" style="margin-top:0.5rem;">
+              {project.tags.map((tag) => (
+                <span class="pill pill-muted">{tag}</span>
+              ))}
+            </div>
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noreferrer"
+              style="font-size:0.9rem;font-weight:500;"
+            >
+              View repository ↗
             </a>
-          </h3>
-          <p>{project.description}</p>
-          <div class="meta-row" style="margin-top:0.5rem;">
-            {project.tags.map((tag) => (
-              <span class="pill pill-muted">{tag}</span>
-            ))}
-          </div>
-          <a href={project.repo} target="_blank" rel="noreferrer" style="font-size:0.9rem;font-weight:500;">
-            View repository ↗
-          </a>
-        </article>
-      ))
-    }
-  </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 
   <section class="section">
     <div class="card">
       <span class="eyebrow">Build Together</span>
-      <h2>Looking to collaborate on open-source rehab, hardware, or AI tools?</h2>
+      <h2>Looking to collaborate on products, AI workflows, or open-source tools?</h2>
       <p>
-        I actively use GitHub to document experiments, share code, and collaborate with engineers
-        and researchers around the world.
+        I actively use GitHub to document experiments, share code, and collaborate with engineers,
+        product builders, and researchers around the world.
       </p>
       <div class="btn-row" style="margin-top:1rem;">
         <a class="btn btn-primary" href={site.links.github} target="_blank" rel="noreferrer">

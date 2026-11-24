@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, education, openSourceProjects } from '../data/site';
+import { site, education, bycProducts, openSourceProjects } from '../data/site';
 
 const inventions = (await getCollection('inventions')).sort(
   (a, b) => a.data.order - b.data.order
@@ -60,8 +60,36 @@ const inventions = (await getCollection('inventions')).sort(
 
   <section class="section">
     <div class="section-head">
-      <h2>Open Source &amp; Product Builds</h2>
-      <a class="section-link" href="/projects">All projects →</a>
+      <h2>Product Leadership — BYC Ventures</h2>
+      <a class="section-link" href="/projects#byc-ventures">All 7 products &amp; systems →</a>
+    </div>
+    <div class="grid-2">
+      {
+        bycProducts.slice(0, 4).map((product) => (
+          <article class="card">
+            <div class="meta-row">
+              <span class="pill">{product.role}</span>
+              <span>{product.subtitle}</span>
+            </div>
+            <h3>
+              <a href="/projects#byc-ventures" style="color:inherit;">
+                {product.name}
+              </a>
+            </h3>
+            <p>{product.summary}</p>
+            <a href="/projects#byc-ventures" style="font-size:0.9rem;font-weight:500;">
+              View product contributions →
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Open Source &amp; Experiments</h2>
+      <a class="section-link" href="/projects#open-source">All projects →</a>
     </div>
     <div class="grid-2">
       {
